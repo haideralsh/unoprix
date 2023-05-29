@@ -1,0 +1,32 @@
+rescript = 1
+g_finger := /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/react/lib/ocaml/install.stamp
+g_finger := /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/core/lib/ocaml/install.stamp
+g_finger := /Users/haider/Documents/code/price-per-weight/node_modules/rescript-vitest/lib/ocaml/install.stamp
+rule astj
+  command = /Users/haider/Documents/code/price-per-weight/node_modules/rescript/darwin/bsc.exe  -bs-v 10.1.4 -bs-jsx 4 -bs-jsx-mode automatic -open RescriptCore -absname -bs-ast -o $out $i
+o src/App.ast : astj ../../src/App.res
+rule deps
+  command = /Users/haider/Documents/code/price-per-weight/node_modules/rescript/darwin/bsb_helper.exe -hash 0515e037823f59bdbfc6fccb9c3fe78f $in
+  restat = 1
+o src/App.d : deps src/App.ast src/App.iast
+o src/App.iast : astj ../../src/App.resi
+rule mi
+  command = /Users/haider/Documents/code/price-per-weight/node_modules/rescript/darwin/bsc.exe -I src -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/react/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/core/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/rescript-vitest/lib/ocaml -open RescriptCore  -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/App.cmi : mi src/App.iast
+rule mj
+  command = /Users/haider/Documents/code/price-per-weight/node_modules/rescript/darwin/bsc.exe -bs-read-cmi -I src -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/react/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/core/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/rescript-vitest/lib/ocaml -open RescriptCore  -bs-package-name price-per-weight -bs-package-output es6:$in_d:.bs.mjs -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/App.cmj ../../src/App.bs.mjs : mj src/App.ast src/App.cmi
+o src/Lib.ast : astj ../../src/Lib.res
+o src/Lib.d : deps src/Lib.ast
+rule mij
+  command = /Users/haider/Documents/code/price-per-weight/node_modules/rescript/darwin/bsc.exe -I src -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/react/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/@rescript/core/lib/ocaml -I /Users/haider/Documents/code/price-per-weight/node_modules/rescript-vitest/lib/ocaml -open RescriptCore  -bs-package-name price-per-weight -bs-package-output es6:$in_d:.bs.mjs -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/Lib.cmj src/Lib.cmi ../../src/Lib.bs.mjs : mij src/Lib.ast
+o src/Main.ast : astj ../../src/Main.res
+o src/Main.d : deps src/Main.ast
+o src/Main.cmj src/Main.cmi ../../src/Main.bs.mjs : mij src/Main.ast
