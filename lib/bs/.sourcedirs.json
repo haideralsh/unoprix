@@ -1,1 +1,0 @@
-{ "dirs" : [ "src" ] , "pkgs" : [ [ "rescript-vitest" , "/Users/haider/Documents/code/price-per-weight/node_modules/rescript-vitest" ] , [ "@rescript/react" , "/Users/haider/Documents/code/price-per-weight/node_modules/@rescript/react" ] , [ "@rescript/core" , "/Users/haider/Documents/code/price-per-weight/node_modules/@rescript/core" ] ] , "generated" : [] }
