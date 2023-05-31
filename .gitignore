@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Rescript 
+*.bs.mjs
+lib
+
+# Project 
+todo
