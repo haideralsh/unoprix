@@ -20,7 +20,7 @@ let measurements = {
   },
 }
 
-let uom = measurement =>
+let defaultUnitFor = measurement =>
   switch measurement {
   | "weight" => measurements.weight.defaultValue
   | "volume" => measurements.volume.defaultValue

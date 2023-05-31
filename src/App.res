@@ -18,17 +18,17 @@ let make = () => {
   let (measurement, setMeasurement) = React.useState(() => defaultMeasurement)
   let (totalMeasurement, setTotalMeasurement) = React.useState(() => "")
   let (totalMeasurementUom, setTotalMeasurementUom) = React.useState(() =>
-    Measurement.uom(defaultMeasurement)
+    Measurement.defaultUnitFor(defaultMeasurement)
   )
   let (totalPrice, setTotalPrice) = React.useState(() => "")
   let (unitMeasurement, setUnitMeasurement) = React.useState(() => "")
   let (unitMeasurementUom, setUnitMeasurementUom) = React.useState(() =>
-    Measurement.uom(defaultMeasurement)
+    Measurement.defaultUnitFor(defaultMeasurement)
   )
 
   React.useEffect1(() => {
-    setTotalMeasurementUom(_prev => Measurement.uom(measurement))
-    setUnitMeasurementUom(_prev => Measurement.uom(measurement))
+    setTotalMeasurementUom(_prev => Measurement.defaultUnitFor(measurement))
+    setUnitMeasurementUom(_prev => Measurement.defaultUnitFor(measurement))
 
     None
   }, [measurement])
