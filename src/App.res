@@ -35,8 +35,8 @@ let make = () => {
 
   <div className="flex flex-col gap-8 p-8 max-w-sm mx-auto">
     <div className="flex justify-between">
-      <h1 className="font-extrabold leading-7 text-lime-500 truncate text-3xl tracking-tight">
-        <span className="text-lime-500"> {React.string("unoprix")} </span>
+      <h1 className="font-extrabold leading-7 text-emerald-500 truncate text-3xl tracking-tight">
+        <span className="text-emerald-500"> {React.string("unoprix")} </span>
       </h1>
       <div className="inset-y-0 right-0 flex items-center">
         <label htmlFor="unit type" className="sr-only"> {React.string("Unit type")} </label>
@@ -47,7 +47,7 @@ let make = () => {
           }}
           id="unit-type"
           name="unit-type"
-          className="h-full rounded-md border-0 bg-transparent py-2 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm">
+          className="h-full rounded-md border-0 bg-transparent py-2 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm">
           <option value="weight"> {React.string("Weight")} </option>
           <option value="volume"> {React.string("Volume")} </option>
           <option value="length"> {React.string("Length")} </option>
@@ -70,7 +70,7 @@ let make = () => {
             type_="number"
             name="total-weight"
             id="total-weight"
-            className="block w-full rounded-md border-0 py-3 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-3 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
@@ -82,7 +82,7 @@ let make = () => {
               }}
               id="unit"
               name="unit"
-              className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm">
+              className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm">
               {React.array(units(measurement))}
             </select>
           </div>
@@ -106,7 +106,7 @@ let make = () => {
             type_="number"
             name="total-price"
             id="total-price"
-            className="block w-full rounded-md border-0 py-3 pr-20 pl-8 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-3 pr-20 pl-8 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0.00"
           />
         </div>
@@ -127,7 +127,7 @@ let make = () => {
             type_="number"
             name="price-per"
             id="price-per"
-            className="block w-full rounded-md border-0 py-3 px-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-3 px-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
@@ -141,7 +141,7 @@ let make = () => {
               }}
               id="unit-weight-uom"
               name="unit-weight-uom"
-              className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm">
+              className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm">
               {React.array(units(measurement))}
             </select>
           </div>
