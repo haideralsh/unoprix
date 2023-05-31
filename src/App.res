@@ -36,7 +36,7 @@ let make = () => {
   <div className="flex flex-col gap-8 p-8 max-w-sm mx-auto">
     <div className="flex justify-between">
       <h1 className="font-extrabold leading-7 text-lime-500 truncate text-3xl tracking-tight">
-        {React.string("prix")}
+        <span className="text-lime-500"> {React.string("unoprix")} </span>
       </h1>
       <div className="inset-y-0 right-0 flex items-center">
         <label htmlFor="unit type" className="sr-only"> {React.string("Unit type")} </label>
