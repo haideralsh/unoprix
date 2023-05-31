@@ -1,19 +1,13 @@
-open Lib
+let unitOptions = units =>
+  Belt.Array.map(units, unit => {
+    <option value={unit} key={unit}> {React.string(unit)} </option>
+  })
 
 let units = measurement =>
   switch measurement {
-  | "weight" =>
-    Belt.Array.map(measurements.weight.units, unit => {
-      <option value={unit} key={unit}> {React.string(unit)} </option>
-    })
-  | "volume" =>
-    Belt.Array.map(measurements.volume.units, unit => {
-      <option value={unit} key={unit}> {React.string(unit)} </option>
-    })
-  | "length" =>
-    Belt.Array.map(measurements.length.units, unit => {
-      <option value={unit} key={unit}> {React.string(unit)} </option>
-    })
+  | "weight" => unitOptions(Measurement.measurements.weight.units)
+  | "volume" => unitOptions(Measurement.measurements.volume.units)
+  | "length" => unitOptions(Measurement.measurements.length.units)
   | _ => []
   }
 
@@ -23,14 +17,18 @@ let defaultMeasurement = "weight"
 let make = () => {
   let (measurement, setMeasurement) = React.useState(() => defaultMeasurement)
   let (totalMeasurement, setTotalMeasurement) = React.useState(() => "")
-  let (totalMeasurementUom, setTotalMeasurementUom) = React.useState(() => uom(defaultMeasurement))
+  let (totalMeasurementUom, setTotalMeasurementUom) = React.useState(() =>
+    Measurement.uom(defaultMeasurement)
+  )
   let (totalPrice, setTotalPrice) = React.useState(() => "")
   let (unitMeasurement, setUnitMeasurement) = React.useState(() => "")
-  let (unitMeasurementUom, setUnitMeasurementUom) = React.useState(() => uom(defaultMeasurement))
+  let (unitMeasurementUom, setUnitMeasurementUom) = React.useState(() =>
+    Measurement.uom(defaultMeasurement)
+  )
 
   React.useEffect1(() => {
-    setTotalMeasurementUom(_prev => uom(measurement))
-    setUnitMeasurementUom(_prev => uom(measurement))
+    setTotalMeasurementUom(_prev => Measurement.uom(measurement))
+    setUnitMeasurementUom(_prev => Measurement.uom(measurement))
 
     None
   }, [measurement])
@@ -154,7 +152,7 @@ let make = () => {
         <h2 className="text-2xl font-bold leading-7 text-gray-900 whitespace-nowrap">
           <span className="font-light"> {React.string("$")} </span>
           {Js.Float.toFixedWithPrecision(
-            calculateCostPerUnitMeasurement(
+            Calculate.costPerUnitMeasurement(
               ~measurement,
               ~totalMeasurement,
               ~totalPrice,
