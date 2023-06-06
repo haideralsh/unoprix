@@ -143,6 +143,7 @@ let make = () => {
         </div>
       </div>
       <PricePer
+        system
         measurement
         totalMeasurement
         totalPrice

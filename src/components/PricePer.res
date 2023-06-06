@@ -1,5 +1,6 @@
 @react.component
 let make = (
+  ~system,
   ~measurement,
   ~totalMeasurement,
   ~totalPrice,
@@ -8,6 +9,7 @@ let make = (
   ~unitMeasurementUom,
 ) => {
   let result = Calculate.costPerUnitMeasurement(
+    ~system,
     ~measurement,
     ~totalMeasurement,
     ~totalPrice,

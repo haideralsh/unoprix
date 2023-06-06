@@ -37,7 +37,7 @@ let systemMeasurements = {
     },
     length: {
       defaultValue: "ft",
-      units: ["in", "ft", "mi"],
+      units: ["in", "ft"],
     },
   },
 }

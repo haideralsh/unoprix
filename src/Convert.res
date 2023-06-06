@@ -20,3 +20,24 @@ let toMeters = (length, ~from) => {
   | _ => length
   }
 }
+
+let toGallons = (volume, ~from) => {
+  switch from {
+  | "fl oz" => volume /. 128.0
+  | _ => volume
+  }
+}
+
+let toFoot = (length, ~from) => {
+  switch from {
+  | "in" => length /. 12.0
+  | _ => length
+  }
+}
+
+let toPounds = (weight, ~from) => {
+  switch from {
+  | "oz" => weight /. 16.0
+  | _ => weight
+  }
+}
