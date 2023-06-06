@@ -11,15 +11,15 @@ let costPerUnitMeasurement = (
   let parsedUnitMeasurement = Parse.floatOfString(unitMeasurement)
 
   let (convertedTotalMeasurement, convertedUnitMeasurement) = switch measurement {
-  | "weight" => (
+  | #weight => (
       parsedTotalMeasurement->Convert.toGrams(~from=totalMeasurementUom),
       parsedUnitMeasurement->Convert.toGrams(~from=unitMeasurementUom),
     )
-  | "length" => (
+  | #length => (
       parsedTotalMeasurement->Convert.toMeters(~from=totalMeasurementUom),
       parsedUnitMeasurement->Convert.toGrams(~from=unitMeasurementUom),
     )
-  | "volume" => (
+  | #volume => (
       parsedTotalMeasurement->Convert.toLiters(~from=totalMeasurementUom),
       parsedUnitMeasurement->Convert.toLiters(~from=unitMeasurementUom),
     )

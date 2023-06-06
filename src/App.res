@@ -147,23 +147,14 @@ let make = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-baseline justify-between">
-        <span className="text-gray-500"> {React.string("=")} </span>
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 whitespace-nowrap">
-          <span className="font-light"> {React.string("$")} </span>
-          {Js.Float.toFixedWithPrecision(
-            Calculate.costPerUnitMeasurement(
-              ~measurement,
-              ~totalMeasurement,
-              ~totalPrice,
-              ~totalMeasurementUom,
-              ~unitMeasurement,
-              ~unitMeasurementUom,
-            ),
-            ~digits=2,
-          )->React.string}
-        </h2>
-      </div>
+      <PricePer
+        measurement
+        totalMeasurement
+        totalPrice
+        totalMeasurementUom
+        unitMeasurement
+        unitMeasurementUom
+      />
     </div>
   </div>
 }
