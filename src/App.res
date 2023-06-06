@@ -54,6 +54,7 @@ let make = () => {
           htmlFor="total-weight"
           className="flex justify-between text-sm leading-6 text-gray-500 font-medium uppercase">
           {React.string(`Total ${(measurement :> string)}`)}
+          <SystemSwitcher system measurement onChange={setSystem} />
         </label>
         <div className="relative mt-2.5 rounded-md">
           <input
