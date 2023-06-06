@@ -3,45 +3,39 @@ let unitOptions = units =>
     <option value={unit} key={unit}> {React.string(unit)} </option>
   })
 
-let units = measurement =>
-  switch measurement {
-  | "weight" => unitOptions(Measurement.measurements.weight.units)
-  | "volume" => unitOptions(Measurement.measurements.volume.units)
-  | "length" => unitOptions(Measurement.measurements.length.units)
-  | _ => []
-  }
-
-let defaultMeasurement = "weight"
+let defaultSystem = Measurement.Metric
+let defaultMeasurement: Measurement.measurment = #weight
 
 @react.component
 let make = () => {
   let (measurement, setMeasurement) = React.useState(() => defaultMeasurement)
+  let (system, setSystem) = React.useState(() => defaultSystem)
   let (totalMeasurement, setTotalMeasurement) = React.useState(() => "")
   let (totalMeasurementUom, setTotalMeasurementUom) = React.useState(() =>
-    Measurement.defaultUnitFor(defaultMeasurement)
+    Measurement.defaultUnitFor(~system=defaultSystem, ~measurement=defaultMeasurement)
   )
   let (totalPrice, setTotalPrice) = React.useState(() => "")
   let (unitMeasurement, setUnitMeasurement) = React.useState(() => "")
   let (unitMeasurementUom, setUnitMeasurementUom) = React.useState(() =>
-    Measurement.defaultUnitFor(defaultMeasurement)
+    Measurement.defaultUnitFor(~system=defaultSystem, ~measurement=defaultMeasurement)
   )
 
-  React.useEffect1(() => {
-    setTotalMeasurementUom(_prev => Measurement.defaultUnitFor(measurement))
-    setUnitMeasurementUom(_prev => Measurement.defaultUnitFor(measurement))
+  React.useEffect2(() => {
+    setTotalMeasurementUom(_prev => Measurement.defaultUnitFor(~system, ~measurement))
+    setUnitMeasurementUom(_prev => Measurement.defaultUnitFor(~system, ~measurement))
 
     None
-  }, [measurement])
+  }, (system, measurement))
 
   <div className="flex flex-col gap-8 p-8 max-w-sm mx-auto">
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <h1 className="font-extrabold leading-7 text-emerald-500 truncate text-3xl tracking-tight">
         <span className="text-emerald-500"> {React.string("unoprix")} </span>
       </h1>
       <div className="inset-y-0 right-0 flex items-center">
         <label htmlFor="unit type" className="sr-only"> {React.string("Unit type")} </label>
         <select
-          value={measurement}
+          value={(measurement :> string)}
           onChange={e => {
             setMeasurement(ReactEvent.Form.target(e)["value"])
           }}
@@ -58,10 +52,10 @@ let make = () => {
       <div>
         <label
           htmlFor="total-weight"
-          className="block text-sm leading-6 text-gray-500 font-medium uppercase">
-          {React.string(`Total ${measurement}`)}
+          className="flex justify-between text-sm leading-6 text-gray-500 font-medium uppercase">
+          {React.string(`Total ${(measurement :> string)}`)}
         </label>
-        <div className="relative mt-1 rounded-md">
+        <div className="relative mt-2.5 rounded-md">
           <input
             value={totalMeasurement}
             onChange={e => {
@@ -83,7 +77,7 @@ let make = () => {
               id="unit"
               name="unit"
               className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm">
-              {React.array(units(measurement))}
+              {React.array(Measurement.unitsFor(~system, ~measurement)->unitOptions)}
             </select>
           </div>
         </div>
@@ -94,7 +88,7 @@ let make = () => {
           className="block text-sm leading-6 text-gray-500 font-medium uppercase">
           {React.string("Total price")}
         </label>
-        <div className="relative mt-1 rounded-md">
+        <div className="relative mt-2.5 rounded-md">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
             <span className="text-gray-500 sm:text-sm"> {React.string("$")} </span>
           </div>
@@ -118,7 +112,7 @@ let make = () => {
           className="block text-sm leading-6 text-gray-500 font-medium uppercase">
           {React.string("Price per")}
         </label>
-        <div className="relative mt-1 rounded-md">
+        <div className="relative mt-2.5 rounded-md">
           <input
             value={unitMeasurement}
             onChange={e => {
@@ -142,7 +136,7 @@ let make = () => {
               id="unit-weight-uom"
               name="unit-weight-uom"
               className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm">
-              {React.array(units(measurement))}
+              {React.array(Measurement.unitsFor(~system, ~measurement)->unitOptions)}
             </select>
           </div>
         </div>
