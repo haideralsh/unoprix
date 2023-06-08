@@ -4,11 +4,14 @@ module Switch = {
     <button
       onClick={onClick}
       className={`
-                ${system == value ? "bg-white" : "bg-gray-200"}
+                ${system == value ? "font-medium" : "font-normal"}
+                text-gray-900
                 pointer-events-auto 
                 rounded-md
-                px-2.5
+                w-12
+                h-6
                 text-s
+                z-20
                 focus-visible:outline-none
                 focus-visible:ring-2
                 focus-visible:ring-emerald-500`}>
@@ -18,7 +21,7 @@ module Switch = {
 
 @react.component
 let make = (~system, ~measurement, ~onChange) =>
-  <div className="flex ring-1 ring-gray-200 rounded-md p-0.5 bg-gray-200 gap-0.5">
+  <div className="relative flex rounded-md p-0.5 bg-gray-200">
     <Switch
       system
       measurement
@@ -27,5 +30,13 @@ let make = (~system, ~measurement, ~onChange) =>
     />
     <Switch
       system measurement value={Measurement.Metric} onClick={_ => onChange(_ => Measurement.Metric)}
+    />
+    <span
+      className={`absolute block h-6 w-12 bg-white shadow-sm rounded-md transition-transform z-10 ease-out duration-200
+     ${switch system {
+        | Measurement.Metric => "translate-x-12"
+        | Measurement.Imperial => "translate-x-0"
+        }}
+    `}
     />
   </div>
