@@ -28,7 +28,7 @@ let make = (
       <span className="text-gray-500"> {React.string("=")} </span>
       <h2 className="text-2xl font-bold leading-7 text-gray-900 whitespace-nowrap">
         <span className="font-light"> {React.string("$")} </span>
-        {rounded->React.string}
+        {rounded->NumberFormat.formatCurrency->React.string}
       </h2>
     </div>
     {wasRounded
