@@ -68,6 +68,8 @@ let make = () => {
             className="block w-full rounded-md border-0 py-3 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
             type_="text"
+            pattern="[0-9]*"
+            noValidate=true
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
             <label htmlFor="unit" className="sr-only"> {React.string("Unit")} </label>
@@ -105,6 +107,8 @@ let make = () => {
             className="block w-full rounded-md border-0 py-3 pr-20 pl-8 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0.00"
             type_="text"
+            pattern="[0-9]*"
+            noValidate=true
           />
         </div>
       </div>
@@ -127,6 +131,8 @@ let make = () => {
             className="block w-full rounded-md border-0 py-3 px-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
             type_="text"
+            pattern="[0-9]*"
+            noValidate=true
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
             <label htmlFor="unit-weight-uom" className="sr-only">
