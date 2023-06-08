@@ -1,5 +1,5 @@
 let unitOptions = units =>
-  Belt.Array.map(units, unit => {
+  Array.map(units, unit => {
     <option value={unit} key={unit}> {React.string(unit)} </option>
   })
 
@@ -62,10 +62,10 @@ let make = () => {
             onChange={e => {
               setTotalMeasurement(ReactEvent.Form.target(e)["value"])
             }}
-            type_="number"
+            onBlur={_ => setTotalMeasurement(_ => NumberFormat.format(totalMeasurement))}
             name="total-weight"
             id="total-weight"
-            className="block w-full rounded-md border-0 py-3 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
+            className="block outline-none w-full rounded-md border-0 py-3 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
           />
           <div className="absolute inset-y-0 right-0 flex items-center">
@@ -98,10 +98,10 @@ let make = () => {
             onChange={e => {
               setTotalPrice(ReactEvent.Form.target(e)["value"])
             }}
-            type_="number"
+            onBlur={_ => setTotalPrice(_ => NumberFormat.formatCurrency(totalPrice))}
             name="total-price"
             id="total-price"
-            className="block w-full rounded-md border-0 py-3 pr-20 pl-8 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
+            className="block outline-none w-full rounded-md border-0 py-3 pr-20 pl-8 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0.00"
           />
         </div>
@@ -119,10 +119,10 @@ let make = () => {
             onChange={e => {
               setUnitMeasurement(ReactEvent.Form.target(e)["value"])
             }}
-            type_="number"
+            onBlur={_ => setUnitMeasurement(_ => NumberFormat.format(unitMeasurement))}
             name="price-per"
             id="price-per"
-            className="block w-full rounded-md border-0 py-3 px-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
+            className="block outline-none w-full rounded-md border-0 py-3 px-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
             placeholder="0"
           />
           <div className="absolute inset-y-0 right-0 flex items-center">

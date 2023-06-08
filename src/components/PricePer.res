@@ -21,7 +21,7 @@ let make = (
   let rounded = result->Js.Float.toFixedWithPrecision(~digits=2)
   let complete = result->Js.Float.toString
 
-  let wasRounded = Js.Float.fromString(rounded) !== result
+  let wasRounded = Utils.Float.fromString(rounded) !== result
 
   <div className="flex flex-col gap-1 tabular-nums">
     <div className="flex items-center justify-between">
@@ -31,9 +31,8 @@ let make = (
         {rounded->React.string}
       </h2>
     </div>
-    {switch wasRounded {
-    | true => <span className="text-sm self-end text-gray-400"> {complete->React.string} </span>
-    | false => React.null
-    }}
+    {wasRounded
+      ? <span className="text-sm self-end text-gray-400"> {complete->React.string} </span>
+      : React.null}
   </div>
 }

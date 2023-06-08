@@ -9,43 +9,44 @@ let costPerUnitMeasurement = (
   ~unitMeasurement,
   ~unitMeasurementUom,
 ) => {
-  let parsedTotalPrice = Parse.floatOfString(totalPrice)
-  let parsedTotalMeasurement = Parse.floatOfString(totalMeasurement)
-  let parsedUnitMeasurement = Parse.floatOfString(unitMeasurement)
+  let parsedPrice = totalPrice->Utils.String.stripCommas->Utils.Float.fromString
 
-  let (convertedTotalMeasurement, convertedUnitMeasurement) = switch (system, measurement) {
+  let parsedTotal = totalMeasurement->Utils.String.stripCommas->Utils.Float.fromString
+  let parsedUnit = unitMeasurement->Utils.String.stripCommas->Utils.Float.fromString
+
+  let (convertedTotal, convertedUnit) = switch (system, measurement) {
   | (Metric, #weight) => (
-      parsedTotalMeasurement->Convert.toGrams(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toGrams(~from=unitMeasurementUom),
+      parsedTotal->Convert.toGrams(~from=totalMeasurementUom),
+      parsedUnit->Convert.toGrams(~from=unitMeasurementUom),
     )
   | (Metric, #volume) => (
-      parsedTotalMeasurement->Convert.toMeters(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toGrams(~from=unitMeasurementUom),
+      parsedTotal->Convert.toMeters(~from=totalMeasurementUom),
+      parsedUnit->Convert.toGrams(~from=unitMeasurementUom),
     )
   | (Metric, #length) => (
-      parsedTotalMeasurement->Convert.toLiters(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toLiters(~from=unitMeasurementUom),
+      parsedTotal->Convert.toLiters(~from=totalMeasurementUom),
+      parsedUnit->Convert.toLiters(~from=unitMeasurementUom),
     )
 
   | (Imperial, #weight) => (
-      parsedTotalMeasurement->Convert.toPounds(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toPounds(~from=unitMeasurementUom),
+      parsedTotal->Convert.toPounds(~from=totalMeasurementUom),
+      parsedUnit->Convert.toPounds(~from=unitMeasurementUom),
     )
   | (Imperial, #volume) => (
-      parsedTotalMeasurement->Convert.toGallons(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toGallons(~from=unitMeasurementUom),
+      parsedTotal->Convert.toGallons(~from=totalMeasurementUom),
+      parsedUnit->Convert.toGallons(~from=unitMeasurementUom),
     )
   | (Imperial, #length) => (
-      parsedTotalMeasurement->Convert.toFoot(~from=totalMeasurementUom),
-      parsedUnitMeasurement->Convert.toFoot(~from=unitMeasurementUom),
+      parsedTotal->Convert.toFoot(~from=totalMeasurementUom),
+      parsedUnit->Convert.toFoot(~from=unitMeasurementUom),
     )
 
   | _ => (0.0, 0.0)
   }
 
-  switch (convertedTotalMeasurement, convertedUnitMeasurement) {
+  switch (convertedTotal, convertedUnit) {
   | (0.0, _) => 0.0
   | (_, 0.0) => 0.0
-  | _ => parsedTotalPrice /. (convertedTotalMeasurement /. convertedUnitMeasurement)
+  | _ => parsedPrice /. (convertedTotal /. convertedUnit)
   }
 }
