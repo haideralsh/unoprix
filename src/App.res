@@ -4,7 +4,7 @@ let unitOptions = units =>
   })
 
 let defaultSystem = Measurement.Metric
-let defaultMeasurement: Measurement.measurment = #weight
+let defaultMeasurement: Measurement.kind = #weight
 
 @react.component
 let make = () => {

@@ -1,4 +1,4 @@
-let formatWithFormatter = (value, formatter) => {
+let formatWithFormatter = (value, ~formatter) => {
   switch value {
   | "" => value
   | _ => {
@@ -16,7 +16,7 @@ let formatWithFormatter = (value, formatter) => {
 let format = value => {
   let numberFormatter = Intl.NumberFormat.make()
 
-  value->formatWithFormatter(numberFormatter)
+  value->formatWithFormatter(~formatter=numberFormatter)
 }
 
 let formatCurrency = value => {
@@ -24,5 +24,5 @@ let formatCurrency = value => {
     "minimumFractionDigits": 2,
   })
 
-  value->formatWithFormatter(currencyFormatter)
+  value->formatWithFormatter(~formatter=currencyFormatter)
 }

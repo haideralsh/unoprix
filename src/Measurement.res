@@ -1,6 +1,6 @@
 type system = Metric | Imperial
 
-type measurment = [#weight | #volume | #length]
+type kind = [#weight | #volume | #length]
 
 type config = {
   defaultValue: string,
@@ -9,10 +9,10 @@ type config = {
 
 type measurements = {weight: config, volume: config, length: config}
 
-type systemMeasurements = {m: measurements, i: measurements}
+type systemMeasurements = {metric: measurements, imperial: measurements}
 
 let systemMeasurements = {
-  m: {
+  metric: {
     weight: {
       defaultValue: "g",
       units: ["mg", "g", "kg"],
@@ -26,7 +26,7 @@ let systemMeasurements = {
       units: ["mm", "cm", "m"],
     },
   },
-  i: {
+  imperial: {
     weight: {
       defaultValue: "lb",
       units: ["lb", "oz"],
@@ -44,26 +44,26 @@ let systemMeasurements = {
 
 let defaultUnitFor = (~system, ~measurement) =>
   switch (system, measurement) {
-  | (Metric, #weight) => systemMeasurements.m.weight.defaultValue
-  | (Metric, #volume) => systemMeasurements.m.volume.defaultValue
-  | (Metric, #length) => systemMeasurements.m.length.defaultValue
+  | (Metric, #weight) => systemMeasurements.metric.weight.defaultValue
+  | (Metric, #volume) => systemMeasurements.metric.volume.defaultValue
+  | (Metric, #length) => systemMeasurements.metric.length.defaultValue
 
-  | (Imperial, #weight) => systemMeasurements.i.weight.defaultValue
-  | (Imperial, #volume) => systemMeasurements.i.volume.defaultValue
-  | (Imperial, #length) => systemMeasurements.i.length.defaultValue
+  | (Imperial, #weight) => systemMeasurements.imperial.weight.defaultValue
+  | (Imperial, #volume) => systemMeasurements.imperial.volume.defaultValue
+  | (Imperial, #length) => systemMeasurements.imperial.length.defaultValue
 
   | _ => ""
   }
 
 let unitsFor = (~system, ~measurement) =>
   switch (system, measurement) {
-  | (Metric, #weight) => systemMeasurements.m.weight.units
-  | (Metric, #volume) => systemMeasurements.m.volume.units
-  | (Metric, #length) => systemMeasurements.m.length.units
+  | (Metric, #weight) => systemMeasurements.metric.weight.units
+  | (Metric, #volume) => systemMeasurements.metric.volume.units
+  | (Metric, #length) => systemMeasurements.metric.length.units
 
-  | (Imperial, #weight) => systemMeasurements.i.weight.units
-  | (Imperial, #volume) => systemMeasurements.i.volume.units
-  | (Imperial, #length) => systemMeasurements.i.length.units
+  | (Imperial, #weight) => systemMeasurements.imperial.weight.units
+  | (Imperial, #volume) => systemMeasurements.imperial.volume.units
+  | (Imperial, #length) => systemMeasurements.imperial.length.units
 
   | _ => []
   }
