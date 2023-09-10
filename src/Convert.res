@@ -41,3 +41,10 @@ let toPounds = (weight, ~from) => {
   | _ => weight
   }
 }
+
+let toItem = (quantity, ~from) => {
+  switch from {
+  | "dozen" => quantity *. 12.0
+  | _ => quantity
+  }
+}

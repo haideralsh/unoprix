@@ -1,69 +1,84 @@
 type system = Metric | Imperial
 
-type kind = [#weight | #volume | #length]
+type kind = [#weight | #volume | #length | #quantity]
 
 type config = {
   defaultValue: string,
   units: array<string>,
 }
 
-type measurements = {weight: config, volume: config, length: config}
+type systemConfig = {metric: config, imperial: config}
 
-type systemMeasurements = {metric: measurements, imperial: measurements}
+type measurementConfig = {
+  weight: systemConfig,
+  volume: systemConfig,
+  length: systemConfig,
+  quantity: config,
+}
 
-let systemMeasurements = {
-  metric: {
-    weight: {
+let configs = {
+  weight: {
+    metric: {
       defaultValue: "g",
       units: ["mg", "g", "kg"],
     },
-    volume: {
-      defaultValue: "l",
-      units: ["l", "ml"],
-    },
-    length: {
-      defaultValue: "m",
-      units: ["mm", "cm", "m"],
-    },
-  },
-  imperial: {
-    weight: {
+    imperial: {
       defaultValue: "lb",
       units: ["lb", "oz"],
     },
-    volume: {
+  },
+  volume: {
+    metric: {
+      defaultValue: "l",
+      units: ["l", "ml"],
+    },
+    imperial: {
       defaultValue: "gal",
       units: ["gal", "fl oz"],
     },
-    length: {
+  },
+  length: {
+    metric: {
+      defaultValue: "m",
+      units: ["mm", "cm", "m"],
+    },
+    imperial: {
       defaultValue: "ft",
       units: ["in", "ft"],
     },
+  },
+  quantity: {
+    defaultValue: "item",
+    units: ["item", "dozen"],
   },
 }
 
 let defaultUnitFor = (~system, ~measurement) =>
   switch (system, measurement) {
-  | (Metric, #weight) => systemMeasurements.metric.weight.defaultValue
-  | (Metric, #volume) => systemMeasurements.metric.volume.defaultValue
-  | (Metric, #length) => systemMeasurements.metric.length.defaultValue
+  | (Metric, #weight) => configs.weight.metric.defaultValue
+  | (Metric, #volume) => configs.volume.metric.defaultValue
+  | (Metric, #length) => configs.length.metric.defaultValue
 
-  | (Imperial, #weight) => systemMeasurements.imperial.weight.defaultValue
-  | (Imperial, #volume) => systemMeasurements.imperial.volume.defaultValue
-  | (Imperial, #length) => systemMeasurements.imperial.length.defaultValue
+  | (Imperial, #weight) => configs.weight.imperial.defaultValue
+  | (Imperial, #volume) => configs.volume.imperial.defaultValue
+  | (Imperial, #length) => configs.length.imperial.defaultValue
+
+  | (_, #quantity) => configs.quantity.defaultValue
 
   | _ => ""
   }
 
 let unitsFor = (~system, ~measurement) =>
   switch (system, measurement) {
-  | (Metric, #weight) => systemMeasurements.metric.weight.units
-  | (Metric, #volume) => systemMeasurements.metric.volume.units
-  | (Metric, #length) => systemMeasurements.metric.length.units
+  | (Metric, #weight) => configs.weight.metric.units
+  | (Metric, #volume) => configs.volume.metric.units
+  | (Metric, #length) => configs.length.metric.units
 
-  | (Imperial, #weight) => systemMeasurements.imperial.weight.units
-  | (Imperial, #volume) => systemMeasurements.imperial.volume.units
-  | (Imperial, #length) => systemMeasurements.imperial.length.units
+  | (Imperial, #weight) => configs.weight.imperial.units
+  | (Imperial, #volume) => configs.volume.imperial.units
+  | (Imperial, #length) => configs.length.imperial.units
+
+  | (_, #quantity) => configs.quantity.units
 
   | _ => []
   }

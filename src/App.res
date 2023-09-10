@@ -46,6 +46,7 @@ let make = () => {
           <option value="weight"> {React.string("Weight")} </option>
           <option value="volume"> {React.string("Volume")} </option>
           <option value="length"> {React.string("Length")} </option>
+          <option value="quantity"> {React.string("Quantity")} </option>
         </select>
       </div>
     </div>

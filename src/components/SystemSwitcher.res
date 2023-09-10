@@ -21,22 +21,29 @@ module Switch = {
 
 @react.component
 let make = (~system, ~measurement, ~onChange) =>
-  <div className="relative flex rounded-md p-0.5 bg-gray-200">
-    <Switch
-      system
-      measurement
-      value={Measurement.Imperial}
-      onClick={_ => onChange(_ => Measurement.Imperial)}
-    />
-    <Switch
-      system measurement value={Measurement.Metric} onClick={_ => onChange(_ => Measurement.Metric)}
-    />
-    <span
-      className={`absolute block h-6 w-12 bg-white shadow-sm rounded-md transition-transform z-10 ease-out duration-200
+  switch measurement {
+  | #quantity => React.null
+  | _ =>
+    <div className="relative flex rounded-md p-0.5 bg-gray-200">
+      <Switch
+        system
+        measurement
+        value={Measurement.Imperial}
+        onClick={_ => onChange(_ => Measurement.Imperial)}
+      />
+      <Switch
+        system
+        measurement
+        value={Measurement.Metric}
+        onClick={_ => onChange(_ => Measurement.Metric)}
+      />
+      <span
+        className={`absolute block h-6 w-12 bg-white shadow-sm rounded-md transition-transform z-10 ease-out duration-200
      ${switch system {
-        | Measurement.Metric => "translate-x-12"
-        | Measurement.Imperial => "translate-x-0"
-        }}
+          | Measurement.Metric => "translate-x-12"
+          | Measurement.Imperial => "translate-x-0"
+          }}
     `}
-    />
-  </div>
+      />
+    </div>
+  }
