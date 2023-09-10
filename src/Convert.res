@@ -1,3 +1,5 @@
+open Measurement
+
 let toGrams = (weight, ~from) => {
   switch from {
   | "kg" => weight *. 1000.0
@@ -48,3 +50,18 @@ let toEach = (quantity, ~from) => {
   | _ => quantity
   }
 }
+
+let toBase = (value, ~from, ~system, ~measurement) =>
+  switch (system, measurement) {
+  | (Metric, #weight) => value->toGrams(~from)
+  | (Metric, #volume) => value->toLiters(~from)
+  | (Metric, #length) => value->toMeters(~from)
+
+  | (Imperial, #weight) => value->toPounds(~from)
+  | (Imperial, #volume) => value->toGallons(~from)
+  | (Imperial, #length) => value->toFoot(~from)
+
+  | (_, #quantity) => value->toEach(~from)
+
+  | _ => 0.0
+  }
