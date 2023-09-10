@@ -4,8 +4,7 @@ module Switch = {
     <button
       onClick={onClick}
       className={`
-                ${system == value ? "font-medium" : "font-normal"}
-                text-gray-900
+                ${system == value ? "font-medium text-gray-900" : "font-normal text-gray-500"}
                 pointer-events-auto 
                 rounded-md
                 w-12
