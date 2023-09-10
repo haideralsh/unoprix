@@ -42,9 +42,9 @@ let toPounds = (weight, ~from) => {
   }
 }
 
-let toItem = (quantity, ~from) => {
+let toEach = (quantity, ~from) => {
   switch from {
-  | "dozen" => quantity *. 12.0
+  | "doz" => quantity *. 12.0
   | _ => quantity
   }
 }

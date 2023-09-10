@@ -48,8 +48,8 @@ let configs = {
     },
   },
   quantity: {
-    defaultValue: "item",
-    units: ["item", "dozen"],
+    defaultValue: "ea",
+    units: ["ea", "doz"],
   },
 }
 

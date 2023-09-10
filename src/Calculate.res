@@ -41,8 +41,8 @@ let costPerUnitMeasurement = (
       parsedUnit->Convert.toFoot(~from=unitMeasurementUom),
     )
   | (_, #quantity) => (
-      parsedTotal->Convert.toItem(~from=totalMeasurementUom),
-      parsedUnit->Convert.toItem(~from=unitMeasurementUom),
+      parsedTotal->Convert.toEach(~from=totalMeasurementUom),
+      parsedUnit->Convert.toEach(~from=unitMeasurementUom),
     )
 
   | _ => (0.0, 0.0)
