@@ -1,4 +1,4 @@
-type system = Metric | Imperial
+type system = Metric | Imperial | Both
 
 type kind = [#weight | #volume | #length | #quantity]
 
@@ -63,8 +63,11 @@ let defaultUnitFor = (~system, ~measurement) =>
   | (Imperial, #volume) => configs.volume.imperial.defaultValue
   | (Imperial, #length) => configs.length.imperial.defaultValue
 
-  | (_, #quantity) => configs.quantity.defaultValue
+  | (Both, #weight) => configs.weight.metric.defaultValue
+  | (Both, #volume) => configs.volume.metric.defaultValue
+  | (Both, #length) => configs.length.metric.defaultValue
 
+  | (_, #quantity) => configs.quantity.defaultValue
   | _ => ""
   }
 
@@ -78,7 +81,13 @@ let unitsFor = (~system, ~measurement) =>
   | (Imperial, #volume) => configs.volume.imperial.units
   | (Imperial, #length) => configs.length.imperial.units
 
-  | (_, #quantity) => configs.quantity.units
+  | (Both, #weight) =>
+    Array.concat(configs.weight.metric.units, configs.weight.imperial.units)
+  | (Both, #volume) =>
+    Array.concat(configs.volume.metric.units, configs.volume.imperial.units)
+  | (Both, #length) =>
+    Array.concat(configs.length.metric.units, configs.length.imperial.units)
 
+  | (_, #quantity) => configs.quantity.units
   | _ => []
   }
