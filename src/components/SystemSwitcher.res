@@ -18,7 +18,8 @@ module Switch = {
       {switch value {
        | Measurement.Metric => React.string(Measurement.defaultUnitFor(~system=value, ~measurement))
        | Measurement.Imperial => React.string(Measurement.defaultUnitFor(~system=value, ~measurement))
-       | Measurement.Both => React.string("•")
+       | Measurement.Both => React.string("❋")
+
       }}
     </button>
 }
