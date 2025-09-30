@@ -17,16 +17,18 @@
     "@tailwindcss/forms": "^0.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rescript": "^10.1.4"
+    "rescript": "^10.1.4",
+    "workbox-window": "^7.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
-    "rescript-vitest": "^1.2.0",
+    "rescript-vitest": "^2.1.1",
     "tailwindcss": "^3.3.2",
-    "vite": "^4.1.0",
-    "vite-plugin-pwa": "^1.0.0",
-    "vitest": "^0.31.1"
+    "vite": "^7.1.7",
+    "vite-plugin-pwa": "^1.0.3",
+    "vitest": "^3.2.4",
+    "workbox-build": "^7.3.0"
   }
 }
